@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MALCRIADA — ARCHIVO</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #050505;
+      color: #d8d8d8;
+      font-family: monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* EFECTO DE PANTALLA */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      z-index: 10;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      border-bottom: 1px solid #333;
+    }
+
+    h1 {
+      font-size: 45px;
+      letter-spacing: 12px;
+      margin: 0;
+      color: white;
+    }
+
+    .warning {
+      color: #777;
+      margin-top: 15px;
+    }
+
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .box {
+      border: 1px solid #333;
+      padding: 25px;
+      margin-bottom: 25px;
+      background: #080808;
+    }
+
+    .box:hover {
+      border-color: #777;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: #090909;
+      border: 1px solid #555;
+      color: #ddd;
+      font-family: monospace;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b1b1b;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #memory {
+      margin-top: 30px;
+      line-height: 1.8;
+    }
+
+    .glitch {
+      animation: glitch 0.15s infinite;
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translate(0);
+      }
+
+      25% {
+        transform: translate(-2px, 1px);
+      }
+
+      50% {
+        transform: translate(2px, -1px);
+      }
+
+      75% {
+        transform: translate(-1px, -2px);
+      }
+
+      100% {
+        transform: translate(0);
+      }
+    }
+
+    .red {
+      color: #a00000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #444;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MALCRIADA</h1>
+
+  <div class="warning">
+    ARCHIVO RECUPERADO // 001
+  </div>
+</header>
+
+<main>
+
+  <div class="box">
+    <h2>¿DAVID?</h2>
+
+    <p>
+      Si estás viendo esto, significa que intentaste
+      escapar otra vez.
+    </p>
+
+    <p>
+      No importa cuánto corras.
+    </p>
+
+    <p class="red">
+      NO PUEDES ESCAPAR DE LO QUE HICISTE.
+    </p>
+  </div>
+
+
+  <div class="box">
+    <h2>ARCHIVOS</h2>
+
+    <button onclick="mostrarRecuerdo(1)">
+      [ ARCHIVO 001 ]
+    </button>
+
+    <button onclick="mostrarRecuerdo(2)">
+      [ ARCHIVO 002 ]
+    </button>
+
+    <button onclick="mostrarRecuerdo(3)">
+      [ ARCHIVO 003 ]
+    </button>
+
+    <button onclick="mostrarRecuerdo(4)">
+      [ ARCHIVO 004 — BLOQUEADO ]
+    </button>
+  </div>
+
+
+  <div id="memory" class="box hidden">
+    <p id="memoryText"></p>
+  </div>
+
+
+  <div class="box">
+    <h2>¿QUIERES SALIR?</h2>
+
+    <button onclick="intentarSalir()">
+      CERRAR ARCHIVO
+    </button>
+
+    <p id="exitMessage"></p>
+  </div>
+
+</main>
+
+
+<footer>
+  MALCRIADA // ARCHIVO NO AUTORIZADO
+</footer>
+
+
+<script>
+
+function mostrarRecuerdo(numero) {
+
+  const memory = document.getElementById("memory");
+  const text = document.getElementById("memoryText");
+
+  memory.classList.remove("hidden");
+
+  if (numero === 1) {
+
+    text.innerHTML =
+      "ARCHIVO 001<br><br>" +
+      "Antes de todo esto, dijiste que no había pasado nada.<br><br>" +
+      "¿Todavía lo recuerdas así?";
+
+  }
+
+  if (numero === 2) {
+
+    text.innerHTML =
+      "ARCHIVO 002<br><br>" +
+      "Te fuiste.<br>" +
+      "No miraste atrás.<br><br>" +
+      "Pero alguien guardó el recuerdo.";
+
+  }
+
+  if (numero === 3) {
+
+    text.innerHTML =
+      "ARCHIVO 003<br><br>" +
+      "Dijiste que no era tu responsabilidad.<br><br>" +
+      "Lo repetiste tantas veces que terminaste creyéndolo.";
+
+    document.body.classList.add("glitch");
+
+    setTimeout(() => {
+      document.body.classList.remove("glitch");
+    }, 1200);
+
+  }
+
+  if (numero === 4) {
+
+    text.innerHTML =
+      "<span class='red'>ACCESO DENEGADO.</span><br><br>" +
+      "Todavía no estás preparado para recordar eso.";
+
+  }
+}
+
+
+function intentarSalir() {
+
+  const message = document.getElementById("exitMessage");
+
+  message.innerHTML =
+    "<br>¿YA TE VAS?<br><br>" +
+    "Eso fue exactamente lo que hiciste la última vez.";
+
+  document.body.classList.add("glitch");
+
+  setTimeout(() => {
+    document.body.classList.remove("glitch");
+  }, 800);
+}
+
+</script>
+
+</body>
+</html>
